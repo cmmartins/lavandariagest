@@ -1,0 +1,43 @@
+#!/bin/bash
+
+driver=org.h2.Driver
+url=jdbc:h2:lavandariagest
+
+
+psql() {
+  driver=org.postgresql.Driver
+  url=postgres://user:password@localhost/lavandariagest
+  user=`whoami`
+}
+
+h2() {
+  driver=org.h2.Driver
+  url=jdbc:h2:lavandariagest
+}
+
+help() {
+  echo " Usage: run [-options] "
+  echo " -d    Database type. Available: psql | h2 "
+}
+
+while getopts "d:m:h" opt;
+do
+  case $opt in
+    d) db=$OPTARG ;;
+    m) h2 ;;
+    h) help ; exit 0 ;;
+    *) help ; exit 1 ;;
+  esac
+done
+
+if [ "$db" = "psql" ] ; then
+  psql
+elif [ "$db" = "h2" ] ; then
+  h2
+else
+  echo "Defaulting to h2"
+fi
+
+if [ -n $db ] ; then
+  play debug -Ddatabase_driver=$driver -Ddatabase_url=$url -Ddatabase_user=$user ~run
+fi
