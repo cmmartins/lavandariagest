@@ -39,5 +39,5 @@ else
 fi
 
 if [ -n $db ] ; then
-  play debug -Ddatabase_driver=$driver -Ddatabase_url=$url -Ddatabase_user=$user ~run
+  play debug -Ddatabase_driver=$driver -Ddatabase_url=$url -Ddatabase_user=$user -DapplyEvolutions.default=true ~run
 fi

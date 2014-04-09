@@ -1,12 +1,11 @@
 package controllers;
 
-import db.couch.pojos.Artigo;
-import db.couch.pojos.LinhaTrx;
-import db.couch.pojos.Stats;
-import db.couch.pojos.Trx;
 import db.couch.repo.ArtigoRepository;
-import db.couch.repo.StatsRepository;
+import db.couch.repo.Z1Repository;
 import db.couch.repo.TrxRepository;
+import models.Trx;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ObjectNode;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.ViewResult;
@@ -15,11 +14,17 @@ import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbConnector;
 import org.ektorp.impl.StdCouchDbInstance;
 import play.Play;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Application extends Controller {
@@ -37,29 +42,9 @@ public class Application extends Controller {
 
             ArtigoRepository.init(db);
             TrxRepository.init(db);
-            StatsRepository.init(db);
+            Z1Repository.init(db);
 
-        /*
-        List<Artigo> artigos = ArtigoRepository.getInstance().getAll();
-            System.out.println(artigos.size());
-            List<Trx> trxs = TrxRepository.getInstance().getAll();
-            System.out.println(trxs.size());
 
-            for(Trx trx: trxs){
-                System.out.println(trx.getOrder()+","+trx.getTotal());
-                   List<LinhaTrx> linhas = trx.getLinhas();
-                    for(LinhaTrx linha: linhas){
-                        System.out.println("\t\t"+linha.getTipo()+","+linha.getArtigoNome()+","+linha.getPrecoUnitario());
-                    }
-            }
-
-            ViewResult sums =  StatsRepository.getInstance().getSumResult();
-            List<ViewResult.Row> rows = sums.getRows();
-            for(ViewResult.Row row: rows){
-                System.out.println("-->"+row.getKey()+","+row.getValue());
-            }
-
-             */
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

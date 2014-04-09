@@ -43,9 +43,9 @@ public class TrxRepository extends CouchDbRepositorySupport<Trx>{
         return _instance;
     }
 
-    /*public List<Trx> getAll() {
+    public List<Trx> getAll() {
         return db.queryView(createQuery("allTrx")
                         .includeDocs(true),
                 type);
-    } */
+    }
 }

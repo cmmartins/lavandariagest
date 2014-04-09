@@ -27,6 +27,7 @@ public class Printer extends Controller {
             //must create trx from json
         }
         System.out.println("TRX: "+trx.toString());
+
         if(_id == null) {
             result.put("status", "KO");
             result.put("message", "Missing parameter [_id]");
@@ -51,5 +52,19 @@ public class Printer extends Controller {
             result.put("message", "Hello " + name);
             return ok(result);
         }
+    }
+
+    public static Result printZ1(ObjectNode result){
+        /*
+                 result.put("totalEuros",totalEuros);
+        result.put("totalPago",totalPago);
+        result.put("totalDeve",totalDeve);
+        result.put("totalIvaEuros",totalIvaEuros);
+        result.put("totalDescontosEuros",totalDescontosEuros);
+        result.put("totalPecas",totalpecas);
+        //Guardar Z
+        result.put("artigos", Json.toJson(zarts));
+                 */
+        return TODO;
     }
 }

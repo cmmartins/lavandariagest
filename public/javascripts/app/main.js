@@ -250,12 +250,13 @@ function attachListeners() {
                         }
                     }
                 } else {
+                    var data = new Date().getTime();
                     currentTRX = {
-                        _id: typeTrx + "/" + new Date().getTime(),
+                        _id: typeTrx + "/" + data,
                         order: $inp.val(),
                         clienteNif: 999999998,
                         clienteNome: 'Cliente Final',
-                        data: $.now(),
+                        data: data,
                         linhas: [],
                         total: 0.00,
                         totalIva: 0.00,
@@ -386,6 +387,18 @@ function attachListeners() {
                 });
         }
 
+    });
+    $('.btn-op.fechocaixa').click(function(evt) {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            url: "/lavandaria/fecho",
+            success: function(data) {
+                console.log(data);
+            }
+        });
     });
     $('.btn-op.deve').click(function(evt) {
         if (currentTRX.status == 'ongoing') {

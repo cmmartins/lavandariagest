@@ -20,7 +20,7 @@ public class LinhaTrx extends CouchDbDocument {
     private String entregaDia;
     private String engomar;
     private String defeito;
-    private String valor;
+    private Double valor;
     private Double percentagem;
 
 
@@ -96,11 +96,11 @@ public class LinhaTrx extends CouchDbDocument {
         this.artigoId = artigoId;
     }
 
-    public String getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
