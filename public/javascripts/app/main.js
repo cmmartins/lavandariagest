@@ -371,9 +371,7 @@ function attachListeners() {
                     console.log(currentTRX, 'TRX finalizada');
                     //MANDAR IMPRIMIR, callback
                     //--QUE FAZER? RELOAD?
-                    $('.btn-pos').attr('disabled', 'true');
-                    $('.btn-op.limpar').removeAttr('disabled');
-                    $('.btn-op.imprimir').removeAttr('disabled');
+                    blockPOS();
                     $.ajax({
                         type: "POST",
                         dataType: 'json',
@@ -386,7 +384,6 @@ function attachListeners() {
                     });
                 });
         }
-
     });
     $('.btn-op.fechocaixa').click(function(evt) {
         $.ajax({
@@ -400,6 +397,7 @@ function attachListeners() {
             }
         });
     });
+
     $('.btn-op.deve').click(function(evt) {
         if (currentTRX.status == 'ongoing') {
             currentTRX.status = 'owe';
@@ -407,9 +405,7 @@ function attachListeners() {
                 console.log(currentTRX, 'TRX finalizada como devedor');
                 //MANDAR IMPRIMIR, callback
                 //--QUE FAZER? RELOAD?
-                $('.btn-pos').attr('disabled', 'true');
-                $('.btn-op.limpar').removeAttr('disabled');
-                $('.btn-op.imprimir').removeAttr('disabled');
+                blockPOS();
             });
 
 
@@ -473,7 +469,6 @@ function attachListeners() {
         $.modal.close();
     });
     $('.modal-desconto .btn-desconto-ok').click(function(evt) {
-
         var $curr = $('.input-desconto-modal');
         var un = $curr.attr("data-unidade");
         $('.modal-desconto').trigger('modal-ok', {
@@ -483,8 +478,30 @@ function attachListeners() {
         $('.input-desconto-modal').text(0 + " ");
         $.modal.close();
     });
+}
 
+function blockPOS() {
+    $('.btn-pos').attr('disabled', 'true');
+    $('.btn-op.limpar').removeAttr('disabled');
+    $('.btn-op.imprimir').removeAttr('disabled');
 
+}
+
+function resetPOS() {
+    currentTRX = undefined;
+    currentTotal = 0;
+    currentDesconto = 0;
+    currentSubTotal = 0;
+    isEngomar = false;
+
+    //clear order
+    $('.pos-order-number').val("");
+    //clear NIF
+    $('.pos-cliente').val("");
+    //clear POS lines
+    var $visor = $('.pos-visor-container');
+    $visor.empty();
+    $('.pos-total .valor').text("€ " + toEuros(currentTotal));
 }
 
 function addDefeito(caract) {
