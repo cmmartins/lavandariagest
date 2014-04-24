@@ -21,6 +21,8 @@ import java.util.*;
  */
 @Entity
 public class Trx extends Model {
+    public static final String ARTIGO = "artigo";
+    public static final String DESCONTO = "desconto";
     public static Finder<Long, Trx> find = new Finder(
             Long.class, Trx.class
     );
@@ -29,6 +31,7 @@ public class Trx extends Model {
     public double total;
     public String orderNumber;
     public String clienteNif;
+    public String clienteNome;
     public String statusTrx;
     public long dateTrx;
     public int year;
@@ -43,6 +46,48 @@ public class Trx extends Model {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST)
     public List<TrxLinha> linhas;
+
+
+
+    public Trx(db.couch.pojos.Trx remoteTrx) {
+        this.id = remoteTrx.getcId() ;
+        this.orderNumber = remoteTrx.getOrder();
+        this.clienteNif = String.valueOf(remoteTrx.getClienteNif());
+        this.clienteNome = remoteTrx.getClienteNome();
+        this.statusTrx = remoteTrx.getStatus();
+        Long dateLong = Long.parseLong(remoteTrx.getData());
+        this.dateTrx = dateLong;
+        Calendar c = GregorianCalendar.getInstance();
+        c.setTimeInMillis(dateLong);
+        this.year =c.get(Calendar.YEAR);
+        this.month = c.get(Calendar.MONTH)+1;
+        this.day = c.get(Calendar.DAY_OF_MONTH);
+        this.minutes = c.get(Calendar.MINUTE);
+        this.seconds = c.get(Calendar.SECOND);
+        this.linhas = new ArrayList<>();
+
+        List<LinhaTrx> linhasz = remoteTrx.getLinhas();
+        for (int i = 0; i < linhasz.size(); i++) {
+            LinhaTrx lt = linhasz.get(i);
+            this.linhas.add(new TrxLinha(lt));
+            switch (lt.getTipo()) {
+                case ARTIGO:
+                    totalEuros += lt.getPrecoUnitario();
+                    totalIvaEuros += lt.getIvaIncluido();
+                    totalPecas++;
+                    break;
+                case DESCONTO:
+                    totalDescontosEuros=totalEuros*lt.getPercentagem();
+
+                    totalEuros=  totalEuros - totalEuros*lt.getPercentagem();
+                    totalIvaEuros=  totalIvaEuros -  totalIvaEuros*lt.getPercentagem();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
 
     public Trx(Z1 z1) {
         this.id = z1.getCid();
@@ -64,13 +109,16 @@ public class Trx extends Model {
             LinhaTrx lt = linhasz.get(i);
             this.linhas.add(new TrxLinha(lt));
             switch (lt.getTipo()) {
-                case "artigo":
+                case ARTIGO:
                     totalEuros += lt.getPrecoUnitario();
                     totalIvaEuros += lt.getIvaIncluido();
                     totalPecas++;
                     break;
-                case "desconto":
-                    totalDescontosEuros+=totalEuros*lt.getPercentagem();
+                case DESCONTO:
+                    totalDescontosEuros=totalEuros*lt.getPercentagem();
+
+                    totalEuros=  totalEuros - totalEuros*lt.getPercentagem();
+                    totalIvaEuros=  totalIvaEuros -  totalIvaEuros*lt.getPercentagem();
                     break;
                 default:
                     break;
@@ -82,7 +130,7 @@ public class Trx extends Model {
         Map<String,StatCounter> res = new HashMap<>();
         for (int i = 0; i < linhas.size(); i++) {
              TrxLinha l = linhas.get(i);
-            if("artigo".equals(l.getTipo())){
+            if(ARTIGO.equals(l.getTipo())){
                 StatCounter sc = res.get(l.getArtigoNome());
                 if(sc==null){
                    sc = new StatCounter(l.getPrecoUnitario());
@@ -91,7 +139,7 @@ public class Trx extends Model {
                     sc.sum(l.getPrecoUnitario());
                 }
                 res.put(l.getArtigoNome(),sc);
-            } else if ("desconto".equals(l.getTipo())){
+            } else if (DESCONTO.equals(l.getTipo())){
                 //descontar em todos os que estão para trás
                 for(Map.Entry<String,StatCounter> e: res.entrySet()){
                     res.put(e.getKey(),e.getValue().discount(l.getPercentagem()));

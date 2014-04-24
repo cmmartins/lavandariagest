@@ -17,20 +17,35 @@ input{
 .btn-pos{
     max-height: 60px;
     min-height: 60px;
-    width: 5%;
+    width: 5.3%;
     padding: 0.5% 2%;
     text-wrap: normal;
     overflow-wrap: break-word;
-    overflow-y: hidden;
-    font-size: 12px;
+    overflow: hidden;
+    font-size: 13px;
     margin-bottom: 5px;
+    color: #111;
+    font-weight: bold;
+}
+
+.btn-pos:hover{
+    background-position: inherit;
+}
+
+.btn-pos.deve{
+    background-image: linear-gradient(to bottom,#FFF,rgba(244, 95, 95, 0.64));
+}
+
+.btn-pos.liquido{
+    background-image: linear-gradient(to bottom,#FFF,rgba(95, 244, 155, 0.64));
 }
 
 .btn-dia{
     width: 11%;
     max-height: 30px;
     min-height: 30px;
-    font-size: 11px;
+    font-size: 14px;
+
 }
 
 .btn-op{
@@ -38,6 +53,11 @@ input{
     max-height: 30px;
     min-height: 30px;
     font-size: 12px;
+}
+
+.btn-pos.btn-op-engomar{
+    background-image: linear-gradient(to bottom,#FFF,rgba(244, 214, 95, 0.64));
+    text-transform: uppercase;
 }
 
 .row-artigos{
@@ -50,8 +70,8 @@ input{
 }
 
 .pos-order-number-container{
-    padding: 5px;
     margin-top: 15px;
+    margin-bottom: 5px;
 }
 .pos-order-number-container h3{
     text-align: left;
@@ -59,6 +79,7 @@ input{
 }
 .pos-order-number{
     height: 90px !important;
+    line-height: 90px !important;
     font-size: 60px !important;
     text-align: center;
     background-color: black !important;
@@ -66,8 +87,30 @@ input{
     font-weight: bold !important;
 }
 
+.pos-order-number::-webkit-input-placeholder { 
+    font-style:italic; 
+    text-decoration:overline; 
+    letter-spacing:3px; 
+    color:#999; 
+    font-size: 26px;
+    margin-top: 5px;
+}
+
+
 .pos-cliente-container{
     font-size: 20px;
+    height: 40px !important;
+    line-height: 40px !important;
+    background-color: #EEE !important;
+    color: black !important;
+    font-weight: bold !important;
+    text-align: center;
+    margin-bottom: 10px
+
+}
+
+.pos-diassemana-container{
+    text-align: center;
 }
 
 
@@ -77,18 +120,31 @@ input{
     text-align: center;
 }
 
-.pos-cliente{
+.pos-cliente.error {
+  background-color: rgba(255, 0, 0, 0.10);
+}
+.pos-cliente.ok {
+  background-color: rgba(0, 255, 112, 0.10);
+}
 
+.cliente-editor {
+    position: fixed;
+    left: 20px;
+    height: 30px;
+    text-align: center;
+    font-size: 15px;
 }
 
 .pos-visor-container{
-    min-height: 400px !important;
+    min-height: 520px !important;
     background-color: white;
     font-family: monospace;
     font-size: 16px;
     border: 1px solid #CCC;
     margin: 10px;
     padding: 15px;
+    max-height: 520px;
+    overflow-y: auto;
 }
 
 .pos-visor-container .linha{
@@ -111,7 +167,7 @@ input{
     border-top: 1px solid #000000;
     font-weight: bold;
     font-size: 22px;
-    padding: 0px 0px 0px 15px;
+    padding: 5px 0px 0px 15px;
 }
 
 .btn-remover{
@@ -137,17 +193,21 @@ input{
 .modal-desconto .btn {
     padding: 20px 30px;
     font-size: 20px;
+    min-width: 30px;
+    min-height: 30px;
 }
 
-.modal-desconto .input-desconto-modal{
-    font-size: 25px;
+.modal-desconto .input-desconto-modal {
+    font-size: 45px;
     background-color: #000;
     color: white;
     padding: 15px;
     margin-bottom: 10px;
-    width: 200px;
+    width: 300px;
     text-align: center;
-    margin-left: 85px;
+    margin-left: 40px;
+    min-height: 50px;
+    line-height: 50px;
 }
 
 .linha-subtotal .linha .valor, .linha-desconto .linha .valor {

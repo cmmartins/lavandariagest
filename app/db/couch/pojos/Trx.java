@@ -11,7 +11,7 @@ import java.util.List;
  * Date: 01/04/14
  * Time: 22:41
  */
-@JsonIgnoreProperties({"type", "revision","createdBy","updatedAt","createdAt"})
+@JsonIgnoreProperties({"type", "revision","createdBy","updatedAt","createdAt","creditToPay"})
 public class Trx extends CouchDbDocument {
     public static String ONGOING="ongoing";
     public static String ABORTED="aborted";

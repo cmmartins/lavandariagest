@@ -22,33 +22,25 @@ import views.html.index;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 public class Application extends Controller {
 
     public static Result index() {
-        try{
-            HttpClient httpClient = new StdHttpClient.Builder()
-                    .url("http://"+ Play.application().configuration().getString("internal.couchdb.ip")+":"+Play.application().configuration().getString("internal.couchdb.port"))
-                    .username(Play.application().configuration().getString("internal.couchdb.user"))
-                    .password(Play.application().configuration().getString("internal.couchdb.password"))
-                    .build();
-            CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);
-            CouchDbConnector db = new StdCouchDbConnector(Play.application().configuration().getString("internal.couchdb.name"), dbInstance);
 
+        /*String property = System.getProperty("java.library.path");
+        StringTokenizer parser = new StringTokenizer(property, ";");
+        while (parser.hasMoreTokens()) {
+            System.err.println(parser.nextToken());
+        } */
 
-            ArtigoRepository.init(db);
-            TrxRepository.init(db);
-            Z1Repository.init(db);
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
         return ok(index.render("Your new application is ready."));
+    }
+
+    public static Result now(){
+        ObjectNode result = Json.newObject();
+        result.put("time",System.currentTimeMillis());
+        return ok(result);
     }
 
 }

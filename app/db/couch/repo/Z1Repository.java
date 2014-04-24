@@ -37,13 +37,9 @@ public class Z1Repository extends CouchDbRepositorySupport<Z1>{
 
     private static Z1Repository _instance = null;
 
-    public static void init(CouchDbConnector db) {
-        if(_instance==null)
-            _instance = new Z1Repository(db);
-    }
 
-    public static Z1Repository getInstance(){
-        return _instance;
+    public static Z1Repository getInstance() throws Exception{
+        return new Z1Repository(CouchConnect.connect());
     }
 
     public List<Z1> getAll(int year, int month, int day) {

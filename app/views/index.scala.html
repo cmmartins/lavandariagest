@@ -1,6 +1,6 @@
 @(message: String)
 
-@main("Welcome to Play 2.1") {
+@main("POS Lavandaria Bracarense") {
 
 <div class="container">
     <div class="hero-unit">
@@ -12,6 +12,16 @@
         </div>
     <div class="globalContent">
 
+    </div>
+
+    <div class="modal modal-fecho" style="display:none">
+        <div class="body"></div>
+        <div class="footer">
+        <div class="row-fluid" style="text-align: center;margin-top: 15px;">
+            <div class="btn btn-fecho-ok btn-primary">FECHAR CAIXA</div>
+            <div class="btn btn-fecho-cancelar">Cancelar</div>
+        </div>
+        </div>
     </div>
 
     <div class="modal modal-desconto" style="display:none">
@@ -29,36 +39,37 @@
         </div>
         <div class="row-fluid">
             <div class="span12 pos-extra">
-                <div class="btn  btn-desconto btn-3">3</div>
-                <div class="btn  btn-desconto btn-4">4</div>
-                <div class="btn  btn-desconto btn-5">5</div>
+                <div class="btn  btn-desconto btn-3">4</div>
+                <div class="btn  btn-desconto btn-4">5</div>
+                <div class="btn  btn-desconto btn-5">6</div>
             </div>
         </div>
         <div class="row-fluid">
             <div class="span12 pos-extra">
-                <div class="btn  btn-desconto btn-1">6</div>
-                <div class="btn  btn-desconto btn-2">7</div>
-                <div class="btn  btn-desconto btn-3">8</div>
+                <div class="btn  btn-desconto btn-1">7</div>
+                <div class="btn  btn-desconto btn-2">8</div>
+                <div class="btn  btn-desconto btn-3">9</div>
             </div>
         </div>
         <div class="row-fluid">
             <div class="span12 pos-extra">
                 <div class="btn  btn-desconto btn-0">0</div>
-                <div class="btn  btn-desconto btn-9">9</div>
                 <div class="btn  btn-desconto btn-desconto-comma">.</div>
+                <div class="btn  btn-desconto btn-desconto-back"><i class="icon icon-chevron-left"></i> </div>
             </div>
         </div>
         <div class="row-fluid" style="text-align: center;margin-top: 15px;">
             <div class="btn btn-desconto-ok btn-primary">OK</div>
             <div class="btn btn-desconto-cancelar">Cancelar</div>
-            <div class="btn btn-desconto-x">X</div>
+            <div class="btn btn-desconto-x">X</i></div>
         </div>
     </div>
 </div>
 
 
 <footer class="copy">
-    <p> Lavandaria Bracarense 2014</p>
+    <p style="float:left;font-weight:bold;"> Lavandaria Bracarense 2014</p>
+    <p style="float:right;" class="status"></p>
 </footer>
 </div> <!-- /.container -->
 <script src="@routes.Assets.at("javascripts/vendor/bootstrap/bootstrap.js")" type="text/javascript"></script>
@@ -67,7 +78,10 @@
 <script src="@routes.Assets.at("javascripts/vendor/underscore.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/vendor/handlebars-v1.3.0.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/vendor/jquery.modal.min.js")" type="text/javascript"></script>
-<script src="@routes.Assets.at("javascripts/vendor/pouchdb-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/vendor/debounce.js")" type="text/javascript"></script>
+<!--script src="@routes.Assets.at("javascripts/vendor/pouchdb-2.1.0.min.js")" type="text/javascript"></script-->
+<script src="@routes.Assets.at("javascripts/vendor/pouchdb-nightly.min.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/vendor/nprogress.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/app/base.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/app/main.js")" type="text/javascript"></script>
 }

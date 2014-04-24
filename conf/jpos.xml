@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JposEntries PUBLIC "-//JavaPOS//DTD//EN"
+                             "jpos/res/jcl.dtd">
+<JposEntries> 
+    <JposEntry logicalName="CITIZEN S310II USB Windows">
+        <creation factoryClass="jpos.loader.simple.SimpleJPOSServiceInstanceFactory" serviceClass="jpos.services.Citizen310IIPrinterServices"/>
+        <vendor name="CITIZEN" url="http://www.citizen-systems.co.jp"/>
+        <jpos category="POSPrinter" version="1.11"/>
+        <product description="Jpos printer driver" name="CITIZEN CT-S310II POS printer" url="http://www.citizen-systems.co.jp"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="PhysicalDevice" type="String" value="CITIZEN CT-S310II POS Printer"/>
+        <prop name="PortName" type="String" value="USB003"/>
+        <prop name="PrinterLanguage" type="String" value="0"/>
+        <prop name="Columns" type="String" value="48"/>
+        <prop name="CharacterSet" type="String" value="437"/>
+        <prop name="UseNVRAM" type="String" value="0"/>
+        <prop name="PaperModel" type="String" value="80mm"/>
+        <prop name="deviceBus" type="String" value="USB"/>
+</JposEntry>
+
+    <JposEntry logicalName="M280">
+        <creation factoryClass="com.beiyang.jpos192.ByJposServiceInstanceFactory" serviceClass="com.beiyang.jpos.baseprinterservice.BasePrinterService111"/>
+        <vendor name="SNBC Co., Ltd." url="http://www.newbeiyang.com"/>
+        <jpos category="POSPrinter" version="1.11"/>
+        <product description="POS Printer" name="M280" url="http://www.newbeiyang.com"/>
+
+        <!--Other non JavaPOS required property (mostly vendor properties and bus specific properties i.e. RS232 )-->
+        <prop name="portSettings" type="String" value="395"/>
+        <prop name="deviceClassName" type="String" value="M280"/>
+        <prop name="drawerOpenedOnSignalLow" type="Boolean" value="true"/>
+        <prop name="TST2SideMode" type="Integer" value="0"/>
+        <prop name="portName" type="String" value="USB1"/>
+        <prop name="cashDrawer1" type="Boolean" value="true"/>
+        <prop name="starModel" type="String" value="M280"/>
+</JposEntry>
+</JposEntries>

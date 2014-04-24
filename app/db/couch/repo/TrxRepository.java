@@ -26,7 +26,7 @@ import java.util.List;
   }
 }
  */
-@View( name = "all", map = "function(doc) { if (doc.type == 'trx' ) emit( null, doc._id )}")
+@View( name = "allTrx", map = "function(doc) { if (doc.type == 'trx' ) emit( null, doc._id )}")
 public class TrxRepository extends CouchDbRepositorySupport<Trx>{
     public TrxRepository(CouchDbConnector db) {
         super(Trx.class, db);
@@ -34,13 +34,9 @@ public class TrxRepository extends CouchDbRepositorySupport<Trx>{
 
     private static TrxRepository _instance = null;
 
-    public static void init(CouchDbConnector db) {
-        if(_instance==null)
-            _instance = new TrxRepository(db);
-    }
 
-    public static TrxRepository getInstance(){
-        return _instance;
+    public static TrxRepository getInstance() throws Exception{
+        return new TrxRepository(CouchConnect.connect());
     }
 
     public List<Trx> getAll() {

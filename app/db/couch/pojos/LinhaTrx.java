@@ -1,5 +1,6 @@
 package db.couch.pojos;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.ektorp.support.CouchDbDocument;
 
 import java.util.Date;
@@ -22,6 +23,16 @@ public class LinhaTrx extends CouchDbDocument {
     private String defeito;
     private Double valor;
     private Double percentagem;
+
+    public String getIdlinha() {
+        return idlinha;
+    }
+
+    public void setIdlinha(String idlinha) {
+        this.idlinha = idlinha;
+    }
+
+    private String idlinha;
 
 
     public String getArtigoNome() {

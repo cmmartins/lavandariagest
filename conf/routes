@@ -4,11 +4,14 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /now                        controllers.Application.now()
 
 POST   /print/receipt               controllers.Printer.receipts()
 POST   /print/ticket                controllers.Printer.tickets()
 
-POST   /lavandaria/fecho             controllers.Lavandaria.closePOS()
+POST   /lavandaria/fecho            controllers.Lavandaria.closePOS()
+POST   /lavandaria/nif              controllers.Lavandaria.nif()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
